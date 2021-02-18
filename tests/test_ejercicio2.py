@@ -58,3 +58,5 @@ def test_flight_with_hotel_and_car(browser):
     package_review_page = PackageReviewPage(browser)
     package_review_page.add_a_car()
 
+    # Step 11
+    package_review_page.validate_trip_review(picked_hotel_data)
