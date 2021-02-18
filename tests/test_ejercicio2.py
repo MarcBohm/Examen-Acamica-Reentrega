@@ -5,6 +5,7 @@ from pages.three_star_hotel_page import ThreeStarHotelPage
 from pages.departure_flight_page import DepartureFlightPage
 from pages.return_flight_page import ReturnFlightPage
 from pages.package_review_page import PackageReviewPage
+from pages.review_and_book_page import ReviewBookPage
 import time
 
 
@@ -63,3 +64,7 @@ def test_flight_with_hotel_and_car(browser):
 
     # Step 11 a)
     package_review_page.press_continue()
+
+    # Step 12
+    review_and_book_page = ReviewBookPage(browser)
+    review_and_book_page.validate_trip_details(picked_hotel_data)
