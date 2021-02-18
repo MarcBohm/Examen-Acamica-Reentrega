@@ -68,3 +68,6 @@ def test_flight_with_hotel_and_car(browser):
     # Step 12
     review_and_book_page = ReviewBookPage(browser)
     review_and_book_page.validate_trip_details(picked_hotel_data)
+
+    # Step 13
+    review_and_book_page.validate_who_travelling()
