@@ -60,3 +60,6 @@ def test_flight_with_hotel_and_car(browser):
 
     # Step 11
     package_review_page.validate_trip_review(picked_hotel_data)
+
+    # Step 11 a)
+    package_review_page.press_continue()

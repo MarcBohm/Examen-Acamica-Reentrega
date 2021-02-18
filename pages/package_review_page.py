@@ -8,6 +8,7 @@ class PackageReviewPage:
     hotel_name = (By.ID, "trip-summary-hotel-title")
     hotel_location = (By.XPATH, "//div[@class='hotel']//div[@class='location-info']")
     vehicle_info = (By.XPATH, "//div[@class='package-summary-dx Transp']//div[@class='ticket-traveler-info']")
+    continue_button = (By.CSS_SELECTOR, "button[class='btn-primary btn-action']")
 
     def __init__(self, browser):
         self.browser = browser
@@ -22,3 +23,5 @@ class PackageReviewPage:
         assert self.browser.find_element(*self.hotel_location).text in picked_hotel_data
         assert self.browser.find_element(*self.vehicle_info).text == "1 Vehicle"
 
+    def press_continue(self):
+        self.browser.find_element(*self.continue_button).click()
