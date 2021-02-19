@@ -27,20 +27,34 @@ class FlightSearchPage:
         self.browser.find_element(*self.sort_by_dropdown).click()
         self.browser.find_element(*self.option_duration_shortest).click()
 
+    def transform_duration_to_min(self, duration):
+        amount = 0
+        if "h" in duration:
+            no_spaces_duration = duration.replace(" ", "")
 
+            # Separate in a list the hours from minutes when 'h' appears.
+            duration_split = no_spaces_duration.split("h")
+            amount += int(duration_split[0]) * 60
 
+            # Replace the 'h' and 'm' from the second part of the list, and transform to integer.
+            minutes = duration_split[1].replace("h", "")
+            minutes = minutes.replace("m", "")
+            amount += int(minutes)
+            return amount
+        else:
+            minutes = duration.replace("m", "")
+            return int(minutes)
 
-"""
-        previous_value = self.browser.find_element(*self.hotel_price).text
-        previous_value = int(previous_value.replace("$", ""))
+    def validate_duration_sorted_correctly(self):
+        previous_value = self.browser.find_element(*self.flight_duration).text
+        previous_value = self.transform_duration_to_min(previous_value)
 
-        for i in self.browser.find_elements(*self.hotel_price):
+        for i in self.browser.find_elements(*self.flight_duration):
             new_value = i.text
-            new_value = int(new_value.replace("$", ""))
+            new_value = self.transform_duration_to_min(new_value)
 
             if new_value < previous_value:
                 raise Exception("Sorting by price did not work properly")
             else:
                 previous_value = new_value
-"""
 

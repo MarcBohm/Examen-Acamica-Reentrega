@@ -1,6 +1,7 @@
 from pages.home_page import TravelocityHomePage
 from pages.home_page import FlightTab
 from pages.flight_search_page import FlightSearchPage
+import time
 
 
 def test_booking_a_flight(browser):
@@ -22,4 +23,7 @@ def test_booking_a_flight(browser):
     # Step 2 b) c) d)
     flight_search_page.results_validations()
 
-
+    # Step 3
+    flight_search_page.sort_by_duration_shorter()
+    time.sleep(1)
+    flight_search_page.validate_duration_sorted_correctly()
