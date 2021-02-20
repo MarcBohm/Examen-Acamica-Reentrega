@@ -27,3 +27,13 @@ def test_booking_a_flight(browser):
     flight_search_page.sort_by_duration_shorter()
     time.sleep(1)
     flight_search_page.validate_duration_sorted_correctly()
+
+    # Step 4
+    flight_search_page.select_first_flight()
+
+    # Step 5
+    time.sleep(1)
+    flight_search_page.select_third_flight()
+    time.sleep(1)
+    flight_search_page.reject_hotel_offer()
+

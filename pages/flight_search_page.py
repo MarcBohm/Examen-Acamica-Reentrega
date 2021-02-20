@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
+import time
 
 
 class FlightSearchPage:
@@ -7,8 +7,11 @@ class FlightSearchPage:
     option_duration_shortest = (By.CSS_SELECTOR, "option[data-opt-id='sort-DURATION_INCREASING']")
     flight_card = (By.CSS_SELECTOR, "div[data-test-id='listing-main']")
     select_button = (By.CSS_SELECTOR, "button[data-test-id='select-button']")
+    select_fare_button = (By.CSS_SELECTOR, "button[data-test-id='select-button-1']")
     flight_duration = (By.CSS_SELECTOR, "span[data-test-id='duration']")
     details_and_baggage_fees = (By.CSS_SELECTOR, "span[class='show-flight-details']")
+    sails_pop_up = (By.CSS_SELECTOR, "div[data-test-id='xSellHotelForcedChoice']")
+    no_thanks_button = (By.ID, "forcedChoiceNoThanks")
 
     def __init__(self, browser):
         self.browser = browser
@@ -58,3 +61,21 @@ class FlightSearchPage:
             else:
                 previous_value = new_value
 
+    def select_first_flight(self):
+        self.browser.find_element(self.select_button).click()
+        if self.browser.find_element(*self.select_fare_button).is_displayed():
+            time.sleep(1)
+            self.browser.find_element(*self.select_fare_button).click()
+
+    def select_third_flight(self):
+        flight_list = self.browser.find_elements(*self.flight_card)
+        flight_list[2].find_element(*self.select_button).click()
+        if flight_list[2].find_element(*self.select_fare_button).is_displayed():
+            flight_list[2].find_element(*self.select_fare_button).click()
+
+    def reject_hotel_offer(self):
+        if self.browser.find_element(*self.sails_pop_up).is_displayed():
+            self.browser.find_element(*self.no_thanks_button).click()
+
+    def focus_on_trip_review(self):
+        self.browser.switch_to.window(self.browser.window_handles[1])
