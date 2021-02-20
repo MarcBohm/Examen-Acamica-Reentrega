@@ -1,6 +1,7 @@
 from pages.home_page import TravelocityHomePage
 from pages.home_page import FlightTab
 from pages.flight_search_page import FlightSearchPage
+from pages.trip_review_page import TripReviewPage
 import time
 
 
@@ -37,3 +38,14 @@ def test_booking_a_flight(browser):
     time.sleep(1)
     flight_search_page.reject_hotel_offer()
 
+    # Step 6
+    flight_search_page.focus_on_trip_review()
+    trip_review_page = TripReviewPage(browser)
+    trip_review_page.verify_trip_details()
+
+    # Step 7
+    trip_review_page.continue_booking()
+
+    # Step 8
+    time.sleep(1)
+    trip_review_page.validate_who_travelling()
