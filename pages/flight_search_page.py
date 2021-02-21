@@ -8,6 +8,8 @@ class FlightSearchPage:
     flight_card = (By.CSS_SELECTOR, "div[data-test-id='listing-main']")
     select_button = (By.CSS_SELECTOR, "button[data-test-id='select-button']")
     select_fare_button = (By.CSS_SELECTOR, "button[data-test-id='select-button-1']")
+    select_fare_button_third_flight = (By.XPATH, "//li[@data-test-id='offer-listing'][3]//"
+                                                 "button[@data-test-id='select-button-1']")
     flight_duration = (By.CSS_SELECTOR, "span[data-test-id='duration']")
     details_and_baggage_fees = (By.CSS_SELECTOR, "span[class='show-flight-details']")
     sails_pop_up = (By.CSS_SELECTOR, "div[data-test-id='xSellHotelForcedChoice']")
@@ -17,7 +19,10 @@ class FlightSearchPage:
         self.browser = browser
 
     def validate_sort_dropdown_is_visible(self):
-        self.browser.find_element(*self.sort_by_dropdown).is_displayed()
+        try:
+            self.browser.find_element(*self.sort_by_dropdown).is_displayed()
+        except:
+            raise Exception("El test esta diseñado bajo otra maqueta, por favor reiniciar el test!")
 
     def results_validations(self):
         # This function validates steps 2 b), c), d).
@@ -62,7 +67,7 @@ class FlightSearchPage:
                 previous_value = new_value
 
     def select_first_flight(self):
-        self.browser.find_element(self.select_button).click()
+        self.browser.find_element(*self.select_button).click()
         if self.browser.find_element(*self.select_fare_button).is_displayed():
             time.sleep(1)
             self.browser.find_element(*self.select_fare_button).click()
@@ -70,8 +75,8 @@ class FlightSearchPage:
     def select_third_flight(self):
         flight_list = self.browser.find_elements(*self.flight_card)
         flight_list[2].find_element(*self.select_button).click()
-        if flight_list[2].find_element(*self.select_fare_button).is_displayed():
-            flight_list[2].find_element(*self.select_fare_button).click()
+        if flight_list[2].find_element(*self.select_fare_button_third_flight).is_displayed():
+            flight_list[2].find_element(*self.select_fare_button_third_flight).click()
 
     def reject_hotel_offer(self):
         if self.browser.find_element(*self.sails_pop_up).is_displayed():
