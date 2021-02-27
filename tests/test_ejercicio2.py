@@ -18,8 +18,8 @@ def test_flight_with_hotel_and_car(browser):
     home_page.switch_to_packages_tab()
 
     # Step 2
-    packages_page.complete_leaving_from_field("LAS")
-    packages_page.complete_going_to_field("LAX")
+    packages_page.complete_leaving_from_field()
+    packages_page.complete_going_to_field()
     packages_page.set_valid_dates()
     packages_page.click_search()
 

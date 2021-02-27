@@ -12,8 +12,8 @@ def test_booking_a_flight(browser):
 
     # Step 1
     flight_tab = FlightTab(browser)
-    flight_tab.complete_going_to_field("LAS")
-    flight_tab.complete_leaving_from_field("LAX")
+    flight_tab.complete_going_to_field()
+    flight_tab.complete_leaving_from_field()
     flight_tab.set_valid_dates()
     flight_tab.click_search()
 

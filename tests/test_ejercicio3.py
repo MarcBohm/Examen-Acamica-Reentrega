@@ -7,7 +7,7 @@ def test_search_by_hotel_name(browser):
     hotel_page.load()
 
     # Step 2
-    hotel_page.search_hotel("Montevideo,Uruguay")
+    hotel_page.search_hotel()
 
     # Step 3.a
     assert hotel_page.first_result_from_listing() == "Ad"

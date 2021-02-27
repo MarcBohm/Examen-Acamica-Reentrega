@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-
+from data.provider import Provider
 
 class TravelocityHotelsPage:
     URL = "https://www.travelocity.com/Hotels"
@@ -20,9 +20,11 @@ class TravelocityHotelsPage:
         if self.browser.current_url != self.URL:
             raise Exception('The page that was loaded is not the correct one, please re-run the test')
 
-    def search_hotel(self, value):
+    search_hotel_data = Provider.convertir_json_a_dict("data/datasource.json", "hotel destinations")
+
+    def search_hotel(self):
         self.browser.find_element(*self.going_to_button).click()
-        self.browser.find_element(*self.going_to_input).send_keys(value + Keys.RETURN)
+        self.browser.find_element(*self.going_to_input).send_keys(self.search_hotel_data[0] + Keys.RETURN)
         self.browser.find_element(*self.search_button).click()
 
     def first_result_from_listing(self):

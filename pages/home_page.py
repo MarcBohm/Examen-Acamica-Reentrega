@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from data.provider import Provider
 import time
 
 
@@ -48,13 +49,17 @@ class PackagesTab:
     def __init__(self, browser):
         self.browser = browser
 
-    def complete_leaving_from_field(self, value):
-        self.browser.find_element(*self.leaving_from_button).click()
-        self.browser.find_element(*self.leaving_from_input).send_keys(value + Keys.RETURN)
+    leaving_from_data = Provider.convertir_json_a_dict("data/datasource.json", "flight departures")
 
-    def complete_going_to_field(self, value):
+    def complete_leaving_from_field(self):
+        self.browser.find_element(*self.leaving_from_button).click()
+        self.browser.find_element(*self.leaving_from_input).send_keys(self.leaving_from_data[0] + Keys.RETURN)
+
+    going_to_data = Provider.convertir_json_a_dict("data/datasource.json", "flight destinations")
+
+    def complete_going_to_field(self):
         self.browser.find_element(*self.going_to_button).click()
-        self.browser.find_element(*self.going_to_input).send_keys(value + Keys.RETURN)
+        self.browser.find_element(*self.going_to_input).send_keys(self.going_to_data[0] + Keys.RETURN)
 
     def set_valid_dates(self):
         self.browser.find_element(*self.date_picker_departing_button).click()
@@ -113,13 +118,17 @@ class FlightTab:
     def __init__(self, browser):
         self.browser = browser
 
-    def complete_leaving_from_field(self, value):
-        self.browser.find_element(*self.leaving_from_button).click()
-        self.browser.find_element(*self.leaving_from_input).send_keys(value + Keys.RETURN)
+    leaving_from_data = Provider.convertir_json_a_dict("data/datasource.json", "flight departures")
 
-    def complete_going_to_field(self, value):
+    def complete_leaving_from_field(self):
+        self.browser.find_element(*self.leaving_from_button).click()
+        self.browser.find_element(*self.leaving_from_input).send_keys(self.leaving_from_data[0] + Keys.RETURN)
+
+    going_to_data = Provider.convertir_json_a_dict("data/datasource.json", "flight destinations")
+
+    def complete_going_to_field(self):
         self.browser.find_element(*self.going_to_button).click()
-        self.browser.find_element(*self.going_to_input).send_keys(value + Keys.RETURN)
+        self.browser.find_element(*self.going_to_input).send_keys(self.going_to_data[0] + Keys.RETURN)
 
     def set_valid_dates(self):
         self.browser.find_element(*self.date_picker_departing_button).click()
