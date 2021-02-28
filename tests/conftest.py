@@ -1,10 +1,13 @@
 import pytest
 from selenium import webdriver
+import os
+
 
 @pytest.fixture
 def browser():
     # Setup faze.
-    browser = webdriver.Chrome(executable_path=r"C:\Users\marcb\Downloads\chromedriver_win32\chromedriver.exe")
+    driver_path = os.environ.get('ChromeDriver')
+    browser = webdriver.Chrome(driver_path)
 
     browser.implicitly_wait(15)
 
