@@ -5,7 +5,7 @@ from pom_pages.packages_tab import PackagesTab
 def test_error_message_displayed(browser):
     home_page = HomePage(browser)
     packages_page = PackagesTab(browser)
-    home_page.load()
+    home_page.load('https://www.travelocity.com/')
 
     # Step 1
     home_page.switch_to_packages_tab()
